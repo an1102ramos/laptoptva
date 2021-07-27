@@ -8,6 +8,6 @@ class ViewController extends Controller
 {
     public function viewRedirect()
     {
-        return view('index');
+        return view('admin.index');
     }
 }
