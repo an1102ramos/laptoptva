@@ -16,6 +16,11 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <!-- Navbar Search -->
+
+        <div class="links">
+            <a href="{!! route('lang.change-language', ['en']) !!}">English |</a>
+            <a href="{!! route('lang.change-language', ['vi']) !!}">| Vietnam</a>
+        </div>
         <li class="nav-item">
             <a class="nav-link" data-widget="navbar-search" href="#" role="button">
                 <i class="fas fa-search"></i>

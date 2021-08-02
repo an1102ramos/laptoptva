@@ -1,11 +1,15 @@
 @extends('admin.index')
 @section('title', 'Danh sách nhà cung cấp')
 @section('content')
+    <meta name="_token" content="{{ csrf_token() }}">
     <div class="col-12">
         <div class="row">
             <div class="col-12">
 
                 <center><h1>Danh sách nhà cung cấp</h1>
+                    <div class="form-group">
+                        <input type="text" class="form-controller" id="search" name="search"></input>
+                    </div>
                     <a class="btn btn-primary" href="{{route('supplier.create')}}">Thêm mới</a>
                 </center>
             </div>
@@ -18,10 +22,29 @@
                     </p>
                 @endif
             </div>
-            <div id="supplierData">@include('admin.supplier.list')</div>
+            <div class="col-12" id="supplierData">@include('admin.supplier.list')</div>
 
         </div>
     </div>
+
+    <script type="text/javascript">
+        $('#search').on('keyup',function(){
+            $value = $(this).val();
+            $.ajax({
+                type: 'get',
+                url: '{{ URL::to('search') }}',
+                data: {
+                    'search': $value
+                },
+                success:function(data){
+                    $('tbody').html(data);
+                }
+            });
+        })
+        $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+    </script>
+
+
     <script>
         $(document).ready(function (){
             $(document).on('click', '.pagination a', function (event){

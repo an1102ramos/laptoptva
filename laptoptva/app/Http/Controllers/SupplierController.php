@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddSupplierRequest;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class SupplierController extends Controller
 {
@@ -45,9 +47,15 @@ class SupplierController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AddSupplierRequest $request)
     {
-        //
+        $supplier = new Supplier();
+        $supplier->sub_name = $request->name;
+        $supplier->sub_address = $request->address;
+        $supplier->sub_phone = $request->phone;
+        $supplier->save();
+        Session::flash('success', 'Thêm mới nhà cung cấp thành công');
+        return redirect()->route('supplier.index');
     }
 
     /**
@@ -70,6 +78,7 @@ class SupplierController extends Controller
     public function edit($sup_id)
     {
         $supplier = DB::table('suppliers')->where('sup_id',"$sup_id")->first();
+        Session::flash('success', 'Cập nhật nhà cung cấp thành công');
         return view('admin.supplier.EditSupplier', compact('supplier'));
     }
 
@@ -101,5 +110,22 @@ class SupplierController extends Controller
         $supplier = Supplier::findOrFail($sup_id);
         $supplier->delete();
         return redirect()->route('supplier.index');
+    }
+
+    public function search(Request $request)
+    {
+            if ($request->ajax()) {
+                $output = '';
+                $data = DB::table('suppliers')->where('sub_name', 'LIKE', '%' . $request->search . '%')->get();
+
+                foreach ($data as $key => $supplier) {
+                    $output .= '<tr>
+                    <td>' . $supplier->sub_name . '</td>
+                    <td>' . $supplier->sub_address . '</td>
+                    <td>' . $supplier->sub_phone . '</td>
+                    </tr>';
+                }
+            }
+            return Response($output);
     }
 }
