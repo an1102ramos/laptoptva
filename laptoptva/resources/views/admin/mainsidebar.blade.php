@@ -13,21 +13,14 @@
                 <img src="{{asset('Admin/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Trần Văn An</a>
+                <a href="" class="d-block"> {{ session()->get('user.name') }}</a>
+                <a style="float: right" class="btn btn-outline-primary" href="{{ route('user.logout') }}">
+                    Đăng xuất
+                </a>
             </div>
         </div>
 
-        <!-- SidebarSearch Form -->
-        <div class="form-inline">
-            <div class="input-group" data-widget="sidebar-search">
-                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-                <div class="input-group-append">
-                    <button class="btn btn-sidebar">
-                        <i class="fas fa-search fa-fw"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
+
 
         <!-- Sidebar Menu -->
     @include('admin.sidebar')

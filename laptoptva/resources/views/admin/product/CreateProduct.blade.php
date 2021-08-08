@@ -1,5 +1,5 @@
 @extends('admin.index')
-@section('title', 'Thêm mới nhà cung cấp')
+@section('title', 'Thêm mới sản phẩm')
 @section('content')
     <div class="col-12 col-md-12">
         <div class="row">
@@ -96,6 +96,11 @@
                         <input type="text" class="form-control" name="prd_retail_price"
                                value="{{old('prd_retail_price')}}" placeholder="Enter name" required>
                     </div>
+                    <div class="form-group">
+                        <label>Giá giảm</label>
+                        <input type="text" class="form-control" name="prd_price_discount"
+                               value="{{old('prd_price_discount')}}" placeholder="Enter name" required>
+                    </div>
 
                     <div class="form-group">
                         <label for="inputCategory">Tình trạng</label>
@@ -108,19 +113,40 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="inputCategory">Sale</label>
+                        <select class="form-control" name="prd_on_sale" required>
+                            <option disabled selected>Chọn tình trạng</option>
+                            <option value="0">Không sale</option>
+                            <option value="1">Sale</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label>Ghi chú</label>
                         <textarea class="form-control" name="prd_description"
                                   required>{{old('prd_description')}}</textarea>
                     </div>
 
+{{--                    <div class="form-group">--}}
+{{--                        <label for="inputFileName">Ảnh</label>--}}
+{{--                        <input type="file"--}}
+{{--                               class="form-control-file"--}}
+{{--                               id="inputFile"--}}
+{{--                               name="inputFile"--}}
+{{--                               value="{{old('inputFile')}}"--}}
+{{--                               required>--}}
+{{--                    </div>--}}
                     <div class="form-group">
-                        <label for="inputFileName">Ảnh</label>
-                        <input type="file"
-                               class="form-control-file"
-                               id="inputFile"
-                               name="inputFile"
-                               value="{{old('inputFile')}}"
-                               required>
+                        <label for="exampleInputFile">Ảnh:</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="image" name="inputFile" value="{{ old('inputFile') }}">
+                                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                            </div>
+                            <div class="input-group-append">
+                                <span class="input-group-text">Upload</span>
+                            </div>
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Thêm mới</button>
                     <button class="btn btn-secondary" onclick="window.history.go(-1); return false;">Hủy</button>

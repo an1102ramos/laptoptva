@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use PhpParser\Node\Expr\New_;
 
 class ProductController extends Controller
@@ -21,6 +22,16 @@ class ProductController extends Controller
         $products = Product::paginate(5);
         $categories = Category::all();
         return view('admin.product.ListProduct', compact('products', 'categories'));
+    }
+
+    public function fetch_data(Request $request)
+    {
+        //dd($request->ajax());
+        if($request->ajax()) {
+            $products = Product::paginate(5);
+            //dd($data);
+            return view('admin.product.product_data', compact('products'));
+        }
     }
 
     /**
@@ -56,8 +67,10 @@ class ProductController extends Controller
         $product->prd_instock = $request->prd_instock;
         $product->prd_sell_quantity = $request->prd_sell_quantity;
         $product->prd_price = $request->prd_price;
+        $product->prd_price_discount = $request->prd_price_discount;
         $product->prd_retail_price = $request->prd_retail_price;
         $product->prd_status = $request->prd_status;
+        $product->prd_on_sale = $request->prd_on_sale;
         $product->prd_description = $request->prd_description;
         $product->prd_view_count = 0;
 
@@ -134,27 +147,28 @@ class ProductController extends Controller
         $product->prd_instock = $request->prd_instock;
         $product->prd_sell_quantity = $request->prd_sell_quantity;
         $product->prd_price = $request->prd_price;
+        $product->prd_price_discount = $request->prd_price_discount;
         $product->prd_retail_price = $request->prd_retail_price;
         $product->prd_status = $request->prd_status;
+        $product->prd_on_sale = $request->prd_on_sale;
         $product->prd_description = $request->prd_description;
 
         $file = $request->inputFile;
-        //dd($file);
-        // Nếu file không tồn tại thì trường image gán bằng NULL
-        if (!$request->hasFile('inputFile')) {
-            $product->prd_image = $file;
-        } else {
-            //Lấy ra định dạng và tên mới của file từ request
-            $fileName = $file->getClientOriginalName();
-            //$fileExtension = $file->getClientOriginalExtension();
-            // Gán tên mới cho file trước khi lưu lên server
-            $newFileName = date('d-m-Y-H-i') . "_$fileName";
-
-            //Lưu file vào thư mục storage/app/public/image với tên mới
-            $request->file('inputFile')->storeAs('public/images', $newFileName);
-
-            // Gán trường image của đối tượng product với tên mới
-            $product->prd_image = $newFileName;
+        $prd_old_image = $product->prd_image;
+        if ($request->hasFile('inputFile')) {
+            $image = $product->prd_image;
+            if ($image)
+            {
+                Storage::delete('/public/storage/images/' . $image);
+            }
+                $fileName = $file->getClientOriginalName();
+                $newFileName = date('d-m-Y-H-i') . "_$fileName";
+                $request->file('inputFile')->storeAs('public/images', $newFileName);
+                $product->prd_image = $newFileName;
+        }
+        else
+        {
+            $product->prd_image = $prd_old_image;
         }
         $product->save();
 
@@ -173,6 +187,12 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::findOrFail($id);
+        $image = $product->prd_image;
+
+        if($image)
+        {
+            Storage::delete('/public/'.$image);
+        }
         $product->delete();
         $message = 'Xóa sản phẩm thành công!';
         Session::flash('create-success', $message);
@@ -189,5 +209,20 @@ class ProductController extends Controller
         $totalBlogFilter = count($products);
         $categories = Category::all();
         return view('admin.product.ListProduct', compact('categories', 'totalBlogFilter', 'products' ,'categoryFilter'));
+    }
+
+    public function search(Request $request)
+    {
+
+        $keyword = $request->input('keyword');
+        if (!$keyword)
+        {
+            return redirect()->route('product.index');
+        }
+        $products = Product::where('prd_name', 'LIKE', '%' .$keyword. '%')->orderBy('created_at','desc')->paginate(5);
+        $categories = Category::all();
+
+        return view('admin.product.ListProduct', compact('products', 'categories'));
+
     }
 }

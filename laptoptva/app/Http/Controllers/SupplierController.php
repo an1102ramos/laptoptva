@@ -25,9 +25,11 @@ class SupplierController extends Controller
     }
     public function fetch_data(Request $request)
     {
+        //dd($request->ajax());
         if($request->ajax()) {
-            $data = Supplier::paginate(5);
-            return view('admin.supplier.list', compact('data'))->render();
+            $suppliers = Supplier::paginate(5);
+            //dd($data);
+            return view('admin.supplier.list', compact('suppliers'));
         }
     }
 

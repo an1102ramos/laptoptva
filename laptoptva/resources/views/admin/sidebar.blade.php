@@ -41,7 +41,7 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="pages/charts/chartjs.html" class="nav-link">
+                    <a href="{{ route('order.index') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Đơn hàng</p>
                     </a>
@@ -162,9 +162,28 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="pages/tables/simple.html" class="nav-link">
+                    <a href="{{ route('user.index') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Quản lý admin</p>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
+                <p>
+                    Khách hàng
+                    <i class="fas fa-angle-left right"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('customer.index') }}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Quản lý khách hàng</p>
                     </a>
                 </li>
 

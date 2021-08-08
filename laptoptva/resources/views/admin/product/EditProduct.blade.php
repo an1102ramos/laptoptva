@@ -32,7 +32,7 @@
 
                 <div class="form-group">
                     <label>Danh mục</label>
-                    <select class="form-control" name="cat_id">
+                    <select class="form-control" name="cat_id" required>
                         <option selected disabled>Chọn danh mục</option>
                         @foreach($categories as $category)
 
@@ -96,14 +96,27 @@
                     <label>Giá bán</label>
                     <input type="text" class="form-control" name="prd_retail_price" value="{{$product->prd_retail_price}}" placeholder="Enter name" required>
                 </div>
+                <div class="form-group">
+                    <label>Giá giảm</label>
+                    <input type="text" class="form-control" name="prd_price_discount" value="{{$product->prd_price_discount}}" placeholder="Enter name" required>
+                </div>
 
                 <div class="form-group">
                     <label for="inputCategory">Tình trạng</label>
-                    <select class="form-control" name="prd_status">
+                    <select class="form-control" name="prd_status" required>
                         <option disabled  selected>Chọn tình trạng</option>
-                        <option value="new" {{ $product->status == "new"}} {{'?'}} {{'selected'}} {{':'}} {{""}}}} >New</option>
-                        <option value="like_new" {{ $product->status == "like_new"}} {{'?'}} {{'selected'}} {{':'}} {{""}}}} >Like new</option>
-                        <option value="old" {{ $product->status == "old"}} {{'?'}} {{'selected'}} {{':'}} {{""}}}} >Old</option>
+                        <option value="new" {{ $product->prd_status == "new"?'selected':''}} >New</option>
+                        <option value="like_new" {{ $product->prd_status == "like_new"?'selected':''}} >Like new</option>
+                        <option value="old" {{ $product->prd_status == "old"?'selected':''}} >Old</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputCategory">Sale</label>
+                    <select class="form-control" name="prd_on_sale" required>
+                        <option disabled  selected>Chọn tình trạng</option>
+                        <option value="0" {{ $product->prd_on_sale == "0"?'selected':''}}>Không sale</option>
+                        <option value="1" {{ $product->prd_on_sale == "1"?'selected':''}}>Sale</option>
                     </select>
                 </div>
 
@@ -114,11 +127,12 @@
 
                 <div class="form-group">
                     <label for="inputFileName">Ảnh</label>
-                    <input type="file"
-                           class="form-control-file"
-                           id="inputFile"
-                           name="inputFile"
-                           value="{{$product->inputFile}}">
+                    <input type="text" hidden name="prd_image_old"  value = {{$product->prd_image}}>
+                    <input type="file" name="inputFile" id = "upload" >
+                    <br>
+                    <div>
+                        <img src="{{ asset('storage/images/'.$product->prd_image)}}" width = "200px" id = "img_upload">
+                    </div>
                 </div>
 
 

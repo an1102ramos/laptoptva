@@ -62,8 +62,16 @@
                         <td>{{ $product->prd_retail_price }}</td>
                     </tr>
                     <tr>
+                        <td>Giá giảm</td>
+                        <td>{{ $product->prd_price_discount }}</td>
+                    </tr>
+                    <tr>
                         <td>Tình trạng</td>
                         <td>{{ $product->prd_status }}</td>
+                    </tr>
+                    <tr>
+                        <td>Sale</td>
+                        <td>{{ $product->prd_on_sale == 0?'Không sale':'Sale' }}</td>
                     </tr>
                     <tr>
                         <td>Lượt xem</td>
@@ -89,7 +97,7 @@
                         <td>
                         <td><a class="btn btn-dark" style="float: right" href="{{route('product.index')}}">Quay lại</a>
                         </td>
-                        </td>
+
                     </tr>
 
 

@@ -33,7 +33,7 @@ class ProductRequest extends FormRequest
             'prd_vga' => 'min:2|max:100',
             'prd_service_tag' => 'min:2|max:100',
             'prd_instock' => 'numeric|min:1|max:10000000',
-            'prd_sell_quantity' => 'numeric|min:1|max:10000000',
+            'prd_sell_quantity' => 'numeric|min:0|max:10000000',
             'prd_price' => 'numeric|min:1',
             'prd_retail_price' => 'numeric|min:1',
             'prd_description' => 'min:2|max:500',

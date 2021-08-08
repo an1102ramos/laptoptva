@@ -10,4 +10,14 @@ class Order_detail extends Model
     use HasFactory;
     protected $table = 'order_details';
     protected $primaryKey  = 'order_detail_id';
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'prd_id');
+    }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class, 'order_id');
+    }
 }
