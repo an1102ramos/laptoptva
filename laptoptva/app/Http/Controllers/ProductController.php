@@ -6,6 +6,7 @@ use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use PhpParser\Node\Expr\New_;
@@ -159,7 +160,7 @@ class ProductController extends Controller
             $image = $product->prd_image;
             if ($image)
             {
-                Storage::delete('/public/storage/images/' . $image);
+                unlink(storage_path('../public/storage/images/'.$image));
             }
                 $fileName = $file->getClientOriginalName();
                 $newFileName = date('d-m-Y-H-i') . "_$fileName";
@@ -217,7 +218,7 @@ class ProductController extends Controller
         $keyword = $request->input('keyword');
         if (!$keyword)
         {
-            return redirect()->route('product.index');
+            return redirect()->route('agency.index');
         }
         $products = Product::where('prd_name', 'LIKE', '%' .$keyword. '%')->orderBy('created_at','desc')->paginate(5);
         $categories = Category::all();

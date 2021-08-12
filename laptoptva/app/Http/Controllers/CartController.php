@@ -74,6 +74,7 @@ class CartController extends Controller
 
     public function order(CustomerRequest $request)
     {
+        $contact = Config::orderByDesc('config_id')->first();
         $categories = Category::all();
         $customer = Customer::where('customer_phone', $request->phone)->first();
         if($customer == null){
@@ -101,6 +102,6 @@ class CartController extends Controller
             $orderDetail->save();
         }
         session()->forget('cart');
-        return view('client.cart.success', compact('categories'));
+        return view('client.cart.success', compact('categories', 'contact'));
     }
 }

@@ -1,6 +1,6 @@
 @extends('client.index')
 
-@section('title', 'Đặt hàng thành công')
+@section('title', 'Thành công')
 @section('content')
     <style type="text/css">
 
@@ -18,7 +18,7 @@
         }
         .payment_header
         {
-            background:rgba(255,102,0,1);
+            background: rgb(9, 141, 25);
             padding:20px;
             border-radius:20px 20px 0px 0px;
 
@@ -59,7 +59,7 @@
             color:#fff;
             border-radius:30px;
             padding:5px 10px;
-            background:rgba(255,102,0,1);
+            background:rgba(9, 141, 25);
             transition:all ease-in-out 0.3s;
         }
 
@@ -78,8 +78,8 @@
                         <div class="check"><i class="fa fa-check" aria-hidden="true"></i></div>
                     </div>
                     <div class="content">
-                        <h1>Đặt hàng thành công !</h1>
-                        <p>Chúng tôi sẽ gọi đến số điện thoại đặt hàng để xác nhận đơn hàng. Vui lòng chú ý điện thoại. </p>
+                        <h1>Gửi lời nhắn thành công !</h1>
+                        <p>Cảm ơn bạn đã gửi lời nhắn. Chúng tôi đã nhận được phản hồi từ bạn và sẽ cố gắng trả lời nhanh nhất. </p>
                         <a href="{{ route('client.home') }}">Về trang chủ</a>
                     </div>
 
@@ -88,4 +88,5 @@
         </div>
     </div>
 @endsection
+
 

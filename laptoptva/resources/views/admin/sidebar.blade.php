@@ -71,45 +71,9 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="pages/layout/top-nav.html" class="nav-link">
+                    <a href="{{ route('config.index') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Địa chỉ</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Liên hệ</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/layout/boxed.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Logo</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/layout/fixed-sidebar.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Banner</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/layout/fixed-sidebar-custom.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Slide header</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/layout/fixed-sidebar-custom.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Slide footer</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/layout/fixed-topnav.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Trang nội dung</p>
+                        <p>Config website</p>
                     </a>
                 </li>
 
@@ -188,7 +152,16 @@
                 </li>
 
             </ul>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('contact.index') }}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Phản hồi</p>
+                    </a>
+                </li>
+
+            </ul>
         </li>
-        <li class="nav-header">EXAMPLES</li>
+
     </ul>
 </nav>

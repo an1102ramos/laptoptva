@@ -99,6 +99,15 @@ Route::group(['prefix' => 'laptop', 'middleware' => ['locale']], function () {
 
 
 
+    Route::get('config/', 'ConfigController@index')->name('config.index');
+    Route::get('config/{sup_id}/edit', 'ConfigController@edit')->name('config.edit');
+    Route::get('config/{id}/show', 'ConfigController@show')->name('config.show');
+    Route::post('config/{id}/edit', 'ConfigController@update')->name('config.update');
+
+
+
+
+
 
     Route::get('order/', 'OrderController@index')->name('order.index');
 //    Route::get('order/list', 'OrderController@fetch_data')->name('order.fetch_data');
@@ -107,10 +116,22 @@ Route::group(['prefix' => 'laptop', 'middleware' => ['locale']], function () {
 //    Route::get('order/create', 'OrderController@create')->name('order.create');
 //    Route::post('order/create', 'OrderController@store')->name('order.store');
 //    Route::get('order/{id}/show', 'OrderController@show')->name('order.show');
+    Route::get('order/filter', 'OrderController@filterByOrderStatus')->name('order.filterByOrderStatus');
     Route::post('order/{id}/update', 'OrderController@update')->name('order.update');
     Route::get('order/{id}/destroy', 'OrderController@destroy')->name('order.destroy');
 
+
+
+
+    Route::get('contact/', 'ContactController@index')->name('contact.index');
+    Route::post('contact/create', 'ContactController@store')->name('contact.store');
+    Route::get('contact/{id}/show', 'ContactController@show')->name('contact.show');
+    Route::get('contact/{id}/destroy', 'ContactController@destroy')->name('contact.destroy');
+
 });
+
+
+
 Route::get('/', 'ClientController@index')->name('client.index');
 Route::get('/home', 'ClientController@home')->name('client.home');
 Route::get('/{cat_id}/category', 'ClientController@category')->name('client.category');
@@ -119,8 +140,7 @@ Route::post('/product/search', 'ClientController@search')->name('client.search')
 Route::get('/contact', 'ClientController@contact')->name('client.contact');
 
 
-//Route::get('{prd_id}/add-cart', 'CartController@addCart')->name('product.addcart');
-//Route::get('/cart','CartController@cart')->name('product.cart');
+
 
 
 Route::get('/cart', [CartController::class, 'cart'])->name('cart');
@@ -128,4 +148,10 @@ Route::get('/cart/store', [CartController::class, 'storeCart'])->name('cart.stor
 Route::post('/cart/update', [CartController::class, 'updateCart'])->name('cart.update');
 Route::get('/cart/delete', [CartController::class, 'delete'])->name('cart.delete');
 Route::post('/cart/order', [CartController::class, 'order'])->name('cart.order');
+
+
+
+
+
+
 

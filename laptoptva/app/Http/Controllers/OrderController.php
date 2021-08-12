@@ -53,4 +53,13 @@ class OrderController extends Controller
         return view('admin.order.ListOrder', compact('orders'));
 
     }
+
+    public function filterByOrderStatus(Request $request)
+    {
+
+        $order_status = $request->input('order_status');
+        $orders = Order::where('order_status', $order_status)->paginate(5);
+        $totalOrderFilter = count($orders);
+        return view('admin.order.ListOrder', compact('totalOrderFilter', 'orders', 'order_status' ));
+    }
 }

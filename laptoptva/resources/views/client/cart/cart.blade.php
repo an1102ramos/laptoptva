@@ -101,7 +101,7 @@
                                     <input placeholder="Địa chỉ nhà riêng hoặc cơ quan (bắt buộc)" type="text" name="address" value="{{old('add')}}" class="form-control" required>
                                 </div>
                                 <div class="cart_buttons">
-                                    <button type="submit" class="button cart_button_checkout">Thanh toán</button>
+                                    <button type="submit" class="button cart_button_checkout">Đặt hàng</button>
                                 </div>
 
                             </div>

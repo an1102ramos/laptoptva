@@ -196,6 +196,7 @@
                                                            </a></div></div>
                                                 <div class="product_extras">
                                                     <a class="btn btn-primary" href="{{route('cart', ['id'=>$mostViewProducts->get($prd)->prd_id])}}">Thêm vào giỏ hàng</a>
+                                                    <a class="btn btn-primary"  onclick="AddCart({{ $mostViewProducts->get($prd)->prd_id }})" href="javascript:">Thêm vào giỏ hàng ajax</a>
                                                 </div>
                                             </div>
                                             <div class="product_fav"><i class="fas fa-heart"></i></div>
@@ -607,7 +608,7 @@
                                                     @endif
                                                 </a></div>
                                             <div class="rating_r rating_r_4 bestsellers_rating"><i></i><i></i><i></i><i></i><i></i></div>
-                                            <div class="bestsellers_price discount">{{ number_format($mostSeller->get($prd_most_seller)->prd_price_discount) }}đ
+                                            <div class="bestsellers_price discount">{{ number_format($mostSeller->get($prd_most_seller)->prd_price_discount) }}đ<br>
                                                 <span>{{ number_format($mostSeller->get($prd_most_seller)->prd_retail_price) }}đ</span></div>
                                         </div>
                                     </div>
@@ -689,7 +690,19 @@
             </div>
         </div>
     </div>
+<script>
 
+    function AddCart(id)
+    {
+        $.ajax({
+            url: "{{ route('cart.store')}}?id="+id,
+            type: 'GET',
+        }).done(function (response){
+            console.log(response);
+        });
+
+    }
+</script>
 
 @endsection
 
