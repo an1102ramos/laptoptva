@@ -13,7 +13,7 @@ class Order_detail extends Model
 
     public function product()
     {
-        return $this->belongsTo(Product::class, 'prd_id');
+        return $this->belongsTo(Food::class, 'prd_id');
     }
 
     public function order()
